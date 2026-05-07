@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #00b940;
+    --primary-dark: #00a037;
+    --secondary-color: #2D3047;
+    --text-color: #1A1D23;
+    --text-light: #7d8592;
+    --bg-light: #FFFFFF;
+    --white: #FFFFFF;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--white);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.congrats-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.congrats-image-section {
+    flex: 1.2;
+    padding: 30px;
+    display: flex;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    background: no-repeat center center/cover;
+    border-radius: 24px;
+}
+
+.congrats-form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    background-color: var(--white);
+    padding: 3vh 2rem;
+    overflow-y: auto;
+}
+
+.congrats-card {
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    margin: auto 0;
+}
+
+.success-illustration {
+    margin-bottom: 4vh;
+    display: flex;
+    justify-content: center;
+}
+
+.completed-img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+}
+
+.form-header {
+    margin-bottom: 5vh;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #2D3047;
+}
+
+.form-header p {
+    color: #8E99AF;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.home-btn {
+    width: 100%;
+    padding: 1.1rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.home-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .congrats-image-section {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .congrats-image-section {
+        display: none;
+    }
+    .congrats-form-section {
+        flex: 1;
+        padding: 1.5rem;
+    }
+}

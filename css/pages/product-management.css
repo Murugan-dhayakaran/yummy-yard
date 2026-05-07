@@ -1,0 +1,349 @@
+/* Product Management V2 Styles - Exact Match */
+
+:root {
+    --primary-color: #00C458;
+    --primary-solid: #00C458;
+    --primary-light: #F0FDF4;
+    --text-dark: #0F172A;
+    --text-muted: #94A3B8;
+    --border-color: #F1F4F9;
+    --bg-light: #F8F9FD;
+}
+
+/* Override global card for separate pane look */
+.dashboard-main-card {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 32px !important;
+    margin: 0 !important;
+    min-height: auto !important;
+}
+
+.product-mgmt-container {
+    display: grid;
+    grid-template-columns: 1fr 360px; /* Slightly wider for new content */
+    gap: 32px;
+    height: auto;
+    align-items: start;
+}
+
+@media (max-width: 1200px) {
+    .product-mgmt-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Header Sections */
+.mgmt-header {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #1E293B;
+    margin: 0;
+}
+
+.search-container {
+    position: relative;
+    width: 440px;
+    margin: 0 auto;
+}
+
+.search-input-custom {
+    width: 100%;
+    background: white;
+    border: 1px solid #F1F5F9;
+    border-radius: 14px;
+    padding: 14px 16px 14px 52px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.search-icon-svg {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748B;
+    stroke-width: 1.5;
+}
+
+.btn-add-menu {
+    background: #F0FDF4;
+    color: #22C55E;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+/* Tabs */
+.product-tabs {
+    display: flex;
+    gap: 4px;
+    background: #F1F5F9;
+    padding: 6px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    width: 100%;
+}
+
+.tab-item {
+    flex: 1;
+    padding: 12px 0;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #64748B;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.2s;
+}
+
+.tab-item.active {
+    background: white;
+    color: #0F172A;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Separate Pane Cards */
+.table-pane-card, .right-pane-card {
+    background: white;
+    border-radius: 24px;
+    padding: 32px;
+    border: 1px solid #F1F5F9;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+
+.table-title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.table-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #1E293B;
+}
+
+.products-count {
+    font-size: 0.8rem;
+    background: #F0FDF4;
+    color: #22C55E;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-left: 12px;
+}
+
+.prod-table {
+    width: 100%;
+}
+
+.prod-table th {
+    color: #64748B;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 16px;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.prod-table td {
+    padding: 20px 16px;
+    font-size: 0.95rem;
+    color: #1E293B;
+    border-bottom: 1px solid #F1F5F9;
+}
+
+.stock-count-exact {
+    color: #22C55E;
+    font-weight: 700;
+}
+
+/* --- Right Pane New Sections --- */
+.section-title-exact {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    color: #1E293B;
+}
+
+/* Information Section */
+.info-section {
+    border-bottom: 1px solid #F1F5F9;
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+}
+
+.info-img-box {
+    width: 100%;
+    height: 160px;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.info-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    color: #94A3B8;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.info-value.blue {
+    color: #2F61FF;
+}
+
+/* Edit Section (Existing Form Adjusted) */
+.upload-box-edit {
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 8px;
+    text-align: center;
+    background: #F8FAFC;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-box-edit img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    opacity: 0.8;
+}
+
+.upload-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.form-label-exact {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748B;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.form-control-exact {
+    width: 100%;
+    background: white;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    color: #0F172A;
+}
+
+.btn-reset-exact {
+    background: white;
+    border: 1px solid #E2E8F0;
+    color: #0F172A;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.btn-save-exact {
+    background: #22C55E;
+    color: white;
+    border: none;
+    font-weight: 600;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    flex: 1;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-save-exact:hover {
+    background: #16A34A;
+}
+
+/* Pagination */
+.pagination-area-exact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    color: #64748B;
+    font-size: 0.9rem;
+}
+
+.circle-pills {
+    display: flex;
+    gap: 10px;
+}
+
+.pill-circle {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #64748B;
+}
+
+.pill-circle.active {
+    background: #22C55E;
+    color: white;
+}
+
+.pill-circle.next {
+    background: #22C55E;
+    color: white;
+}

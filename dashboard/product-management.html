@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management | Yummy Yard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/pages/main-dashboard.css?v=12">
+    <link rel="stylesheet" href="../css/pages/product-management.css?v=7">
+</head>
+
+<body>
+    <div class="container-fluid p-0 dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-lg-flex">
+            <div class="sidebar-header d-flex align-items-center gap-3">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo">
+                    <span class="brand-name">Yummy <span class="yard-text">Yard</span></span>
+                </div>
+                <button class="btn btn-link p-0 ms-auto text-muted sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="8" x2="16" y2="8"></line>
+                        <line x1="4" y1="12" x2="16" y2="12"></line>
+                        <line x1="4" y1="16" x2="16" y2="16"></line>
+                        <path d="M19 10l3 3-3 3"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                        alt="Dash"><span>Dashboard</span></a>
+                <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                        alt="Orders"><span>Orders</span></a>
+                <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png"
+                        alt="Menu"><span>Menu</span></a>
+                <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                        alt="Bills"><span>Bills</span></a>
+                <a href="history.html" class="nav-item"><img src="../assets/icons/history.png"
+                        alt="Hist"><span>History</span></a>
+                <a href="product-management.html" class="nav-item active"><img
+                        src="../assets/icons/productmanagement.png" alt="Prod"><span>Product Management</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../auth/login.html" class="nav-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="dashboard-layout flex-grow-1 d-flex flex-column">
+            <header class="top-utility-bar px-4 px-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-link d-lg-none p-0 text-dark" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb mb-0 d-none d-md-block">Home</div>
+                </div>
+                <div class="header-right d-flex align-items-center gap-2 gap-md-4">
+                    <div class="profile-section" style="cursor: pointer;"
+                        onclick="location.href='account-settings.html'">
+                        <img src="../assets/images/profileimage.png" alt="User" class="profile-img">
+                        <span class="user-name d-none d-md-block">Courtney Henry</span>
+                        <svg class="d-none d-md-block" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-main-card">
+                <!-- Page Header -->
+                <div class="mgmt-header">
+                    <h1 class="header-title">Products Management</h1>
+                    <div class="search-container">
+                        <svg class="search-icon-svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" class="search-input-custom" placeholder="Search">
+                    </div>
+                    <button class="btn-add-menu">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Add new menu
+                    </button>
+                </div>
+
+                <!-- Dual Pane Layout -->
+                <div class="product-mgmt-container">
+                    <!-- Left Pane Section -->
+                    <div class="left-pane-section">
+                        <!-- Category Tabs -->
+                        <div class="product-tabs">
+                            <button class="tab-item">All</button>
+                            <button class="tab-item active">Main course</button>
+                            <button class="tab-item">Appetizer</button>
+                            <button class="tab-item">Dessert</button>
+                            <button class="tab-item">Beverage</button>
+                        </div>
+
+                        <!-- Table Card -->
+                        <div class="table-pane-card">
+                            <div class="table-title-area">
+                                <div class="d-flex align-items-center">
+                                    <span class="table-title">Products</span>
+                                    <span class="products-count">120</span>
+                                </div>
+                                <div class="text-muted cursor-pointer">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <circle cx="12" cy="12" r="1"></circle>
+                                        <circle cx="12" cy="5" r="1"></circle>
+                                        <circle cx="12" cy="19" r="1"></circle>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="prod-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product name</th>
+                                            <th>Code</th>
+                                            <th>Category</th>
+                                            <th>Stock</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Crispy Dory Sambal Matah</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kopag Benedict</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dory En Oats</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lemon Butter Dory</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Spicy Tuna Nachos</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alfredo</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blackpaper Chicken</td>
+                                            <td class="text-muted">#12345</td>
+                                            <td class="text-muted">Food</td>
+                                            <td class="stock-count-exact">120</td>
+                                            <td class="fw-bold">$123.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="pagination-area-exact">
+                                <span>Page 1 of 40</span>
+                                <div class="circle-pills">
+                                    <div class="pill-circle active">1</div>
+                                    <div class="pill-circle">2</div>
+                                    <div class="pill-circle">3</div>
+                                    <div class="pill-circle">4</div>
+                                    <div class="pill-circle next">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2.5">
+                                            <polyline points="13 17 18 12 13 7"></polyline>
+                                            <polyline points="6 17 11 12 6 7"></polyline>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Pane Section (Dual View: Info + Edit) -->
+                    <div class="right-pane-card">
+                        <!-- Information product Section -->
+                        <div class="info-section d-none" id="infoSection">
+                            <h2 class="section-title-exact">Information product</h2>
+                            <div class="info-img-box">
+                                <img src="../assets/images/crispy_dory_sambal_matah.png" alt="Dish">
+                            </div>
+                            <div class="info-grid">
+                                <div>
+                                    <div class="info-label">Product name</div>
+                                    <div class="info-value">Crispy dory sambal matah</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Stock</div>
+                                    <div class="info-value blue">102</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Category</div>
+                                    <div class="info-value">Main course</div>
+                                </div>
+                                <div>
+                                    <div class="info-label">Unit price</div>
+                                    <div class="info-value">$200.00</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit product Section -->
+                        <div class="edit-section">
+                            <h2 class="section-title-exact">Edit product</h2>
+
+                            <label class="form-label-exact">Image</label>
+                            <div class="upload-box-edit">
+                                <img src="../assets/images/crispy_dory_sambal_matah.png" alt="Edit Preview">
+                                <div class="upload-overlay-text">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" class="mb-1">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                    <span>Image .jpg</span>
+                                </div>
+                            </div>
+
+                            <div class="row gx-3">
+                                <div class="col-6">
+                                    <label class="form-label-exact">Category</label>
+                                    <div class="position-relative">
+                                        <select class="form-control-exact form-select shadow-none">
+                                            <option selected>Main course</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <label class="form-label-exact">Unit Price</label>
+                                    <div class="position-relative">
+                                        <select class="form-control-exact form-select shadow-none">
+                                            <option selected>$ 200.00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <label class="form-label-exact">Product name</label>
+                            <input type="text" class="form-control-exact" value="Crispy dory sambal matah">
+
+                            <label class="form-label-exact">Code product</label>
+                            <input type="text" class="form-control-exact" value="#12345">
+
+                            <label class="form-label-exact">Stock</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control-exact" value="100">
+                                <svg class="position-absolute end-0 top-50 translate-middle-y me-3 mb-4" width="16"
+                                    height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </div>
+
+                            <div class="d-flex gap-3 mt-4">
+                                <button class="btn-reset-exact">Reset</button>
+                                <button class="btn-save-exact" id="saveBtn">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const saveBtn = document.getElementById('saveBtn');
+            const infoSection = document.getElementById('infoSection');
+
+            if (saveBtn && infoSection) {
+                saveBtn.onclick = function (e) {
+                    e.preventDefault();
+                    console.log('Save clicked');
+                    infoSection.classList.remove('d-none');
+                    infoSection.style.display = 'block'; // Explicit override
+
+                    const rightPane = document.querySelector('.right-pane-card');
+                    if (rightPane) {
+                        rightPane.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                };
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List | Yummy Yard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/pages/main-dashboard.css?v=12">
+    <link rel="stylesheet" href="../css/pages/user-management.css?v=4">
+</head>
+
+<body>
+    <div class="container-fluid p-0 dashboard-wrapper">
+        <!-- Sidebar (Hidden on mobile, shown as Offcanvas) -->
+        <aside class="sidebar d-none d-lg-flex">
+            <div class="sidebar-header d-flex align-items-center gap-3">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo">
+                    <span class="brand-name">Yummy <span class="yard-text">Yard</span></span>
+                </div>
+                <button class="btn btn-link p-0 ms-auto text-muted sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="8" x2="16" y2="8"></line>
+                        <line x1="4" y1="12" x2="16" y2="12"></line>
+                        <line x1="4" y1="16" x2="16" y2="16"></line>
+                        <path d="M19 10l3 3-3 3"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                        alt="Dash"><span>Dashboard</span></a>
+                <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                        alt="Orders"><span>Orders</span></a>
+                <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png"
+                        alt="Menu"><span>Menu</span></a>
+                <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                        alt="Bills"><span>Bills</span></a>
+                <a href="history.html" class="nav-item"><img src="../assets/icons/history.png"
+                        alt="Hist"><span>History</span></a>
+                <a href="product-management.html" class="nav-item"><img src="../assets/icons/productmanagement.png"
+                        alt="Prod"><span>Product Management</span></a>
+
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar (Offcanvas) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+            <div class="offcanvas-header border-bottom">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo" style="width: 30px;">
+                    <span class="brand-name h5 mb-0 ms-2">Yummy Yard</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <nav class="sidebar-nav w-100">
+                    <a href="main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                            alt="Dash"><span>Dashboard</span></a>
+                    <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                            alt="Orders"><span>Orders</span></a>
+                    <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png"
+                            alt="Menu"><span>Menu</span></a>
+                    <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                            alt="Bills"><span>Bills</span></a>
+                    <a href="history.html" class="nav-item"><img src="../assets/icons/history.png"
+                            alt="Hist"><span>History</span></a>
+                    <a href="product-management.html" class="nav-item"><img src="../assets/icons/productmanagement.png"
+                            alt="Prod"><span>Product Management</span></a>
+
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-layout flex-grow-1 d-flex flex-column">
+            <header class="top-utility-bar px-4 px-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-link d-lg-none p-0 text-dark" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb mb-0 d-none d-md-block">Home</div>
+                </div>
+                <div class="header-right d-flex align-items-center gap-2 gap-md-4">
+                    <div class="dropdown d-none d-md-block">
+                        <button
+                            class="btn btn-link text-decoration-none text-dark dropdown-toggle d-flex align-items-center gap-2"
+                            type="button" data-bs-toggle="dropdown">
+                            <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; border-radius: 2px;">
+                            <span class="small fw-bold">Eng (US)</span>
+                        </button>
+                    </div>
+
+                    <button class="icon-btn border-0 bg-transparent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </button>
+
+                    <style>
+                        .icon-btn {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #64748B;
+                            transition: all 0.2s;
+                        }
+
+                        .icon-btn:hover {
+                            background: #F1F5F9;
+                        }
+                    </style>
+
+                    <div class="profile-section">
+                        <img src="../assets/images/profileimage.png" alt="User" class="profile-img">
+                        <span class="user-name d-none d-md-block">Courtney Henry</span>
+                        <svg class="d-none d-md-block" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-main-card flex-grow-1 p-4">
+                <div class="d-flex flex-column h-100">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold mb-0">All Customer List</h2>
+                        <div class="d-flex gap-3 align-items-center">
+                            <div class="search-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" class="form-control" placeholder="Search">
+                            </div>
+                            <button class="btn btn-add-customer" data-bs-toggle="modal"
+                                data-bs-target="#addCustomerModal">Add Customer</button>
+                        </div>
+                    </div>
+
+                    <!-- Table Container -->
+                    <div class="table-responsive flex-grow-1">
+                        <table class="table customer-table align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">
+                                        <div class="custom-checkbox"></div>
+                                    </th>
+                                    <th>Customer Name <span class="sort-icon">▼</span></th>
+                                    <th>Email <span class="sort-icon">▼</span></th>
+                                    <th>Phone No <span class="sort-icon">▼</span></th>
+                                    <th>Order History <span class="sort-icon">▼</span></th>
+                                    <th>Status <span class="sort-icon">▼</span></th>
+                                    <th style="width: 50px;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Row 1 Active -->
+                                <tr class="active-row">
+                                    <td>
+                                        <div class="custom-checkbox checked">✓</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/customer1.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Arrora gaur</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg>
+                                            </div>
+                                            arroragaur@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(201) 555-0124</td>
+                                    <td class="text-muted">25 Order</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <!-- Popup active on this row -->
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2 VIP -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox"></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/James Mullican.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">James Mullican</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            jamesmullican@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(217) 555-0113</td>
+                                    <td class="text-muted">76 Order</td>
+                                    <td><span class="status-badge vip">VIP</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3 Active -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox checked">✓</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Robert Bacins.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Robert Bacins</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            robertbacins@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(252) 555-0126</td>
+                                    <td class="text-muted">43 Order</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4 Inactive -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox checked">✓</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Bethany Jackson.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Bethany Jackson</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            bethanyjackson@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(308) 555-0121</td>
+                                    <td class="text-muted">67 Order</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 5 Active -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox"></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Anne Jacob.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Anne Jacob</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            annejacob@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(229) 555-0109</td>
+                                    <td class="text-muted">32 Order</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 6 VIP -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox checked">✓</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Bethany jackson1.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Bethany Jackson (Sales)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            bethanyjackson@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(239) 555-0108</td>
+                                    <td class="text-muted">76 Order</td>
+                                    <td><span class="status-badge vip">VIP</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 7 Active -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox"></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/James Mullican1.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">James Mullican (Junior)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            jamesmullican@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(207) 555-0119</td>
+                                    <td class="text-muted">12 Order</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 8 Active -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox"></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Jhon Deo.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Jhon Deo</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            jhondeo32@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(629) 555-0129</td>
+                                    <td class="text-muted">25 Order</td>
+                                    <td><span class="status-badge active">Active</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 9 Inactive -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox"></div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/Bethany jackson2.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">Bethany Jackson (Senior)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            bethanyjackson@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(307) 555-0133</td>
+                                    <td class="text-muted">33 Order</td>
+                                    <td><span class="status-badge inactive">Inactive</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 10 VIP -->
+                                <tr>
+                                    <td>
+                                        <div class="custom-checkbox checked">✓</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <img src="../assets/images/James Mullican2.png" alt="Avatar"
+                                                class="customer-avatar">
+                                            <span class="fw-bold text-main">James Mullican (Senior)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 email-cell">
+                                            <div class="email-icon"><svg width="14" height="14" viewBox="0 0 24 24"
+                                                    fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                                    </path>
+                                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                                </svg></div>
+                                            jamesmullican@gmail.com
+                                        </div>
+                                    </td>
+                                    <td class="fw-bold text-main">(704) 555-0127</td>
+                                    <td class="text-muted">19 Order</td>
+                                    <td><span class="status-badge vip">VIP</span></td>
+                                    <td class="position-relative">
+                                        <button class="btn p-0 text-secondary btn-more">•••</button>
+                                        <div class="action-popup">
+                                            <button class="action-item edit">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <path
+                                                        d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7">
+                                                    </path>
+                                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z">
+                                                    </path>
+                                                </svg>
+                                                Edit
+                                            </button>
+                                            <button class="action-item delete">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2">
+                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                    <path
+                                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                    </path>
+                                                </svg>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="d-flex justify-content-center mt-4 pt-3">
+                        <div class="pagination-ui d-flex gap-2 align-items-center">
+                            <button class="page-btn text-muted border-0 bg-transparent">&lt; Back</button>
+                            <button class="page-btn">1</button>
+                            <button class="page-btn active">2</button>
+                            <button class="page-btn">3</button>
+                            <button class="page-btn">4</button>
+                            <button class="page-btn">5</button>
+                            <button class="page-btn text-muted border-0 bg-transparent">Next &gt;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Customer Modal -->
+    <div class="modal fade custom-modal" id="addCustomerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 580px;">
+            <div class="modal-content border-0 p-3 p-md-4" style="border-radius: 20px;">
+                <div class="modal-header border-0 pb-2 px-3">
+                    <h5 class="modal-title fw-bold" style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem;">
+                        Add New Customer</h5>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF4D4D" stroke-width="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body pt-3 px-3">
+                    <form id="modalAddCustomerForm">
+                        <div class="row gx-4 gy-4">
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Customer Name</label>
+                                    <input type="text" class="form-control custom-input modal-input"
+                                        placeholder="James Mullican" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Email</label>
+                                    <input type="email" class="form-control custom-input modal-input"
+                                        placeholder="james.73@gmail.com" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Phone Number</label>
+                                    <input type="tel" class="form-control custom-input modal-input"
+                                        placeholder="(201) 555-0124" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Order History</label>
+                                    <input type="text" class="form-control custom-input modal-input"
+                                        placeholder="25 Orders" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Status</label>
+                                    <input type="text" class="form-control custom-input modal-input"
+                                        placeholder="(201) 555-0124">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group mb-0">
+                                    <label class="form-label modal-label">Statis</label>
+                                    <select class="form-select custom-input modal-input custom-select-arrow">
+                                        <option value="vip">VIP</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-3 mt-4 pt-3 mb-2">
+                            <button type="button" class="btn btn-modal-cancel" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-modal-save">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const moreBtns = document.querySelectorAll('.btn-more');
+
+            // Toggle popup on button click
+            moreBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    // Close all other popups first
+                    document.querySelectorAll('.action-popup.show').forEach(popup => {
+                        if (popup !== this.nextElementSibling) {
+                            popup.classList.remove('show');
+                        }
+                    });
+
+                    // Toggle the current popup
+                    const popup = this.nextElementSibling;
+                    if (popup && popup.classList.contains('action-popup')) {
+                        popup.classList.toggle('show');
+                    }
+                });
+            });
+
+            // Close popup when clicking outside
+            document.addEventListener('click', function () {
+                document.querySelectorAll('.action-popup.show').forEach(popup => {
+                    popup.classList.remove('show');
+                });
+            });
+
+            // Prevent popup from closing when clicking inside it
+            document.querySelectorAll('.action-popup').forEach(popup => {
+                popup.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

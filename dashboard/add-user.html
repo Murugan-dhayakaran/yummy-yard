@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Customer | Yummy Yard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/pages/main-dashboard.css?v=4">
+    <link rel="stylesheet" href="../css/pages/add-user.css?v=4">
+</head>
+
+<body>
+    <div class="container-fluid p-0 dashboard-wrapper">
+        <!-- Sidebar (Hidden on mobile, shown as Offcanvas) -->
+        <aside class="sidebar d-none d-lg-flex">
+            <div class="sidebar-header d-flex align-items-center justify-content-between">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo">
+                    <span class="brand-name">Yummy <span class="yard-text">Yard</span></span>
+                </div>
+                <button class="btn p-0 text-secondary d-none d-lg-block"><svg width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg></button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                        alt="Dash"><span>Dashboard</span></a>
+                <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png" alt="Orders"><span>Orders</span></a>
+                <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png" alt="Menu"><span>Menu</span></a>
+                <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png" alt="Bills"><span>Bills</span></a>
+                <a href="#" class="nav-item"><img src="../assets/icons/history.png" alt="Hist"><span>History</span></a>
+                <a href="#" class="nav-item"><img src="../assets/icons/productmanagement.png" alt="Prod"><span>Product
+                        Management</span></a>
+            </nav>
+            <div class="mt-auto p-4 border-top">
+                <a href="#" class="text-secondary text-decoration-none d-flex align-items-center gap-3">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar (Offcanvas) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+            <div class="offcanvas-header border-bottom">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo" style="width: 30px;">
+                    <span class="brand-name h5 mb-0 ms-2">Yummy Yard</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <nav class="sidebar-nav w-100">
+                    <a href="main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                            alt="Dash"><span>Dashboard</span></a>
+                    <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                            alt="Orders"><span>Orders</span></a>
+                    <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png" alt="Menu"><span>Menu</span></a>
+                    <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png" alt="Bills"><span>Bills</span></a>
+                    <a href="#" class="nav-item"><img src="../assets/icons/history.png"
+                            alt="Hist"><span>History</span></a>
+                    <a href="#" class="nav-item"><img src="../assets/icons/productmanagement.png"
+                            alt="Prod"><span>Product Management</span></a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-layout flex-grow-1 d-flex flex-column">
+            <header class="top-utility-bar px-3 px-md-4 px-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn d-lg-none p-0" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb mb-0 d-none d-sm-flex align-items-center gap-2">
+                        <span class="fw-medium cursor-pointer text-secondary" onclick="window.location.href='main-dashboard.html'">Home</span> 
+                        <span class="text-secondary" style="font-size: 0.8rem;">&#9654;</span> 
+                        <span class="fw-medium cursor-pointer text-secondary" onclick="window.location.href='user-management.html'">Customer List</span>
+                        <span class="text-secondary" style="font-size: 0.8rem;">&#9654;</span> 
+                        <span class="fw-bold">Add New Customer</span>
+                    </div>
+                </div>
+                <div class="header-right d-flex align-items-center gap-3 gap-md-4">
+                    <div class="language-dropdown d-none d-md-flex">
+                        <img src="https://flagcdn.com/w20/us.png" alt="US" class="flag-icon">
+                        <span>Eng (US)</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                    <div class="notifications-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </div>
+                    <div class="mini-profile-dropdown">
+                        <img src="../assets/images/profileimage.png" alt="P" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                        <span class="d-none d-sm-inline fw-bold ms-2">Courtney Henry</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" class="ms-1">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-main-card m-3 m-md-4 flex-grow-1 p-4">
+                <div class="d-flex flex-column h-100">
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 fw-bold mb-0">Add New Customer</h2>
+                    </div>
+
+                    <!-- Form Container -->
+                    <div class="form-container">
+                        <form id="addCustomerForm">
+                            <div class="row gx-5 gy-4">
+                                <div class="col-12 col-md-4 col-lg-3">
+                                    <div class="profile-upload-section d-flex flex-column align-items-center">
+                                        <div class="profile-image-wrapper mb-3" onclick="document.getElementById('profileUpload').click()">
+                                            <div class="profile-placeholder">
+                                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                                </svg>
+                                            </div>
+                                            <img id="profilePreview" src="" alt="Profile Preview" class="d-none">
+                                            <label for="profileUpload" class="upload-btn" onclick="event.stopPropagation()">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M12 5v14M5 12h14"></path>
+                                                </svg>
+                                            </label>
+                                            <input type="file" id="profileUpload" class="d-none" accept="image/*">
+                                        </div>
+                                        <h6 class="fw-bold mb-1">Profile Photo</h6>
+                                        <p class="text-muted small text-center mb-0">Allowed *.jpeg, *.jpg, *.png, *.gif max size of 3.1 MB</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-8 col-lg-9">
+                                    <div class="row g-4">
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control custom-input" placeholder="Enter first name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control custom-input" placeholder="Enter last name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                                                <input type="email" class="form-control custom-input" placeholder="Enter email address" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                                <input type="tel" class="form-control custom-input" placeholder="Enter phone number" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Status</label>
+                                                <select class="form-select custom-input">
+                                                    <option value="active">Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                    <option value="vip">VIP</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-label">Date of Birth</label>
+                                                <input type="date" class="form-control custom-input">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label">Address</label>
+                                                <textarea class="form-control custom-input" rows="3" placeholder="Enter complete address"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end gap-3 mt-5">
+                                        <button type="button" class="btn btn-cancel" onclick="window.location.href='user-management.html'">Cancel</button>
+                                        <button type="button" class="btn btn-save" onclick="window.location.href='user-management.html'">Save Customer</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('profileUpload').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('profilePreview');
+                    const placeholder = document.querySelector('.profile-placeholder');
+                    preview.src = e.target.result;
+                    preview.classList.remove('d-none');
+                    placeholder.classList.add('d-none');
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+    </script>
+</body>
+</html>

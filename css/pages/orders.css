@@ -1,0 +1,225 @@
+/* orders.css */
+
+.orders-search {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-width: 250px;
+}
+
+.orders-search input::placeholder {
+    color: #94A3B8;
+}
+
+.date-picker-box {
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 8px 16px;
+    min-width: 180px;
+    cursor: pointer;
+}
+
+.orders-tabs {
+    background-color: #F8FAFC;
+    border-radius: 12px;
+    padding: 6px;
+    display: flex;
+    width: 100%;
+    gap: 4px;
+    overflow-x: auto;
+}
+
+.orders-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: #94A3B8;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 12px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.tab-btn.active {
+    background-color: white;
+    color: #1E293B;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    font-weight: 600;
+}
+
+.tab-btn:hover:not(.active) {
+    color: #64748B;
+}
+
+/* Order Grid */
+.order-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+@media (max-width: 1200px) {
+    .order-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .order-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Order Card */
+.order-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    border: 1px solid #F1F5F9;
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-avatar-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.bg-blue { background-color: #3B82F6; }
+.bg-orange { background-color: #F97316; }
+.bg-green { background-color: #10B981; }
+.bg-blue-dark { background-color: #2563EB; }
+.bg-orange-dark { background-color: #EA580C; }
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-canceled {
+    background-color: #FEF2F2;
+    color: #EF4444;
+}
+
+.badge-waiting {
+    background-color: #FFF7ED;
+    color: #F97316;
+}
+
+.badge-ready {
+    background-color: #ECFDF5;
+    color: #10B981;
+}
+
+.badge-completed {
+    background-color: #EFF6FF;
+    color: #3B82F6;
+}
+
+/* Dashed Divider */
+.dashed-divider {
+    border-top: 1px dashed #E2E8F0;
+    border-bottom: none;
+    margin: 0;
+    opacity: 1;
+}
+
+/* Table layout */
+.col-item {
+    flex: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+}
+
+.col-qty {
+    flex: 0.5;
+    min-width: 40px;
+}
+
+.col-price {
+    flex: 1;
+    min-width: 60px;
+}
+
+/* Card Buttons */
+.btn-card-action {
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-see-detail {
+    background-color: #E8F5E9;
+    color: #00C458;
+}
+
+.btn-see-detail:hover {
+    background-color: #D1EFE0;
+}
+
+.btn-pay-bills {
+    background-color: #00C458;
+    color: white;
+}
+
+.btn-pay-bills:hover {
+    background-color: #00A94C;
+}
+
+.text-main {
+    color: #1E293B;
+}
+
+/* Make grid card take up vertical space nicely */
+.order-items-table {
+    flex-grow: 1;
+}
+
+/* Sidebar active override for this page */
+.sidebar-nav .nav-item.active {
+    background-color: #00C458 !important;
+    color: white !important;
+}
+
+.sidebar-nav .nav-item.active img {
+    filter: brightness(0) invert(1) !important;
+}
+
+/* Order Detail Modal */
+.dish-card {
+    background-color: #F8FAFC;
+    border-radius: 16px;
+    padding: 12px;
+}
+
+.dish-img {
+    width: 96px;
+    height: 96px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+

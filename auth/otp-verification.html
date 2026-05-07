@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification | Yummy Yard</title>
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="../css/pages/otp-verification.css">
+</head>
+<body>
+    <div class="forgot-container">
+        <!-- Left Side: Image -->
+        <div class="forgot-image-section">
+            <div class="image-wrapper" style="background-image: url('../../assets/images/verfication.png');"></div>
+        </div>
+
+        <!-- Right Side: OTP Verification Form -->
+        <div class="forgot-form-section">
+            <div class="forgot-card">
+                <div class="logo-container">
+                    <img src="../assets/images/LOGO.png" alt="Yummy Yard Logo" class="circular-logo">
+                </div>
+
+                <div class="form-header">
+                    <h2>Enter Verification Code</h2>
+                    <p>We have sent the Verification code to your mobile number</p>
+                </div>
+
+                <div class="otp-input-group">
+                    <input type="text" maxlength="1" class="otp-input" onkeyup="moveNext(this, 'otp2')">
+                    <input type="text" id="otp2" maxlength="1" class="otp-input" onkeyup="moveNext(this, 'otp3')">
+                    <input type="text" id="otp3" maxlength="1" class="otp-input" onkeyup="moveNext(this, 'otp4')">
+                    <input type="text" id="otp4" maxlength="1" class="otp-input" onkeyup="moveNext(this, 'otp5')">
+                    <input type="text" id="otp5" maxlength="1" class="otp-input">
+                </div>
+
+                <button type="button" class="reset-btn" onclick="window.location.href='reset-password.html'">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function moveNext(current, nextId) {
+            if (current.value.length >= 1) {
+                document.getElementById(nextId).focus();
+            }
+        }
+    </script>
+</body>
+</html>

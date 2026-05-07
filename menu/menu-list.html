@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Menu | Yummy Yard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/pages/main-dashboard.css?v=12">
+    <link rel="stylesheet" href="../css/pages/menu.css?v=5">
+    <style>
+        .success-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: #F0FDF4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .transaction-details {
+            background: #F8FAFC;
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        #paymentSuccessModal .modal-content,
+        #paymentFailedModal .modal-content,
+        #printingSuccessModal .modal-content,
+        #printingFailedModal .modal-content,
+        #confirmPrintModal .modal-content,
+        #processingPrintModal .modal-content {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border-radius: 24px !important;
+        }
+
+        .printer-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: #EFF6FF;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .printer-icon-wrapper.success {
+            background: #F0FDF4;
+        }
+
+        .print-progress-container {
+            width: 100%;
+            height: 8px;
+            background: #F1F5F9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .print-progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #00C458;
+            transition: width 0.05s linear;
+        }
+
+        .failed-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: #FFE4E4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .failed-icon-wrapper::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: #FF0000;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .failed-icon-wrapper svg {
+            position: relative;
+            z-index: 1;
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-replay {
+            background: #00C458;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            padding: 15px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-replay:hover {
+            background: #00A34A;
+            color: white;
+        }
+
+        .failed-icon-wrapper-small {
+            width: 48px;
+            height: 48px;
+            background: #FFE4E4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .failed-icon-wrapper-small::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #FF0000;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .failed-icon-wrapper-small svg {
+            position: relative;
+            z-index: 1;
+        }
+
+        .success-icon-wrapper-small {
+            width: 48px;
+            height: 48px;
+            background: #F0F9FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid p-0 dashboard-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar d-none d-lg-flex">
+            <div class="sidebar-header d-flex align-items-center gap-3">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo">
+                    <span class="brand-name">Yummy <span class="yard-text">Yard</span></span>
+                </div>
+                <button class="btn btn-link p-0 ms-auto text-muted sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="8" x2="16" y2="8"></line>
+                        <line x1="4" y1="12" x2="16" y2="12"></line>
+                        <line x1="4" y1="16" x2="16" y2="16"></line>
+                        <path d="M19 10l3 3-3 3"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="../dashboard/main-dashboard.html" class="nav-item"><img src="../assets/icons/Dashboard1.png"
+                        alt="Dash"><span>Dashboard</span></a>
+                <a href="../dashboard/orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                        alt="Orders"><span>Orders</span></a>
+                <a href="menu-list.html" class="nav-item active"><img src="../assets/icons/Menu.png"
+                        alt="Menu"><span>Menu</span></a>
+                <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                        alt="Bills"><span>Bills</span></a>
+                <a href="../dashboard/history.html" class="nav-item"><img src="../assets/icons/history.png"
+                        alt="Hist"><span>History</span></a>
+                <a href="../dashboard/product-management.html" class="nav-item"><img
+                        src="../assets/icons/productmanagement.png" alt="Prod"><span>Product Management</span></a>
+
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar (Offcanvas) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+            <div class="offcanvas-header border-bottom">
+                <div class="brand-info d-flex align-items-center">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo" style="width: 30px;">
+                    <span class="brand-name h5 mb-0 ms-2">Yummy Yard</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <nav class="sidebar-nav w-100">
+                    <a href="../dashboard/main-dashboard.html" class="nav-item"><img
+                            src="../assets/icons/Dashboard1.png" alt="Dash"><span>Dashboard</span></a>
+                    <a href="../dashboard/orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                            alt="Orders"><span>Orders</span></a>
+                    <a href="menu-list.html" class="nav-item active"><img src="../assets/icons/Menu.png"
+                            alt="Menu"><span>Menu</span></a>
+                    <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                            alt="Bills"><span>Bills</span></a>
+                    <a href="../dashboard/history.html" class="nav-item"><img src="../assets/icons/history.png"
+                            alt="Hist"><span>History</span></a>
+                    <a href="../dashboard/product-management.html" class="nav-item"><img
+                            src="../assets/icons/productmanagement.png" alt="Prod"><span>Product Management</span></a>
+
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content Wrapper -->
+        <div class="dashboard-layout flex-grow-1 d-flex flex-column">
+            <header class="top-utility-bar px-4 px-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-link d-lg-none p-0 text-dark" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb mb-0 d-none d-md-block">Home</div>
+                </div>
+                <div class="header-right d-flex align-items-center gap-2 gap-md-4">
+                    <div class="dropdown d-none d-md-block">
+                        <button
+                            class="btn btn-link text-decoration-none text-dark dropdown-toggle d-flex align-items-center gap-2"
+                            type="button" data-bs-toggle="dropdown">
+                            <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; border-radius: 2px;">
+                            <span class="small fw-bold">Eng (US)</span>
+                        </button>
+                    </div>
+
+                    <button class="icon-btn border-0 bg-transparent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </button>
+
+                    <style>
+                        .icon-btn {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #64748B;
+                            transition: all 0.2s;
+                        }
+
+                        .icon-btn:hover {
+                            background: #F1F5F9;
+                        }
+
+                        .profile-section {
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 6px 16px;
+                            border-radius: 50px;
+                        }
+
+                        .profile-img {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+
+                        .user-name {
+                            font-weight: 700;
+                            color: #1E293B;
+                            font-size: 0.95rem;
+                        }
+                    </style>
+
+                    <div class="profile-section">
+                        <img src="../assets/images/profileimage.png" alt="User" class="profile-img">
+                        <span class="user-name d-none d-md-block">Courtney Henry</span>
+                        <svg class="d-none d-md-block" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <!-- POS Content Grid -->
+            <div class="pos-container flex-grow-1">
+                <div class="row g-0 h-100">
+                    <!-- Left Section: Menu Selection -->
+                    <div class="col-lg-8 pos-left-pane d-flex flex-column gap-4" id="menuView">
+                        <div class="order-list-section">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold mb-0">Order List</h5>
+                                <a href="#" class="text-decoration-none small text-muted">See All</a>
+                            </div>
+                            <div class="order-carousel d-flex gap-3 overflow-auto pb-2">
+                                <!-- Order Card 1 -->
+                                <div class="mini-order-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="fw-bold mb-0">Vinicius Bayu</h6>
+                                        <span class="order-id text-muted">#12532</span>
+                                    </div>
+                                    <p class="text-muted small mb-2">3 Items • Table 4A</p>
+                                    <span class="status-badge badge-canceled">Canceled</span>
+                                </div>
+                                <!-- Order Card 2 -->
+                                <div class="mini-order-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="fw-bold mb-0">Cheryl Arema</h6>
+                                        <span class="order-id text-muted">#12532</span>
+                                    </div>
+                                    <p class="text-muted small mb-2">3 Items • Table 8B</p>
+                                    <span class="status-badge badge-ready">Ready to Serve</span>
+                                </div>
+                                <!-- Order Card 3 -->
+                                <div class="mini-order-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="fw-bold mb-0">Kylian Rex</h6>
+                                        <span class="order-id text-muted">#12531</span>
+                                    </div>
+                                    <p class="text-muted small mb-2">12 Items • Table 2C</p>
+                                    <span class="status-badge badge-waiting">Waiting</span>
+                                </div>
+                                <!-- Order Card 4 -->
+                                <div class="mini-order-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="fw-bold mb-0">Rijal Arudam</h6>
+                                        <span class="order-id text-muted">#12529</span>
+                                    </div>
+                                    <p class="text-muted small mb-2">3 Items • Table 2A</p>
+                                    <span class="status-badge badge-completed">Completed</span>
+                                </div>
+                                <!-- Order Card 5 -->
+                                <div class="mini-order-card">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <h6 class="fw-bold mb-0">Ed Berni</h6>
+                                        <span class="order-id text-muted">#12529</span>
+                                    </div>
+                                    <p class="text-muted small mb-2">3 Items • Table 2A</p>
+                                    <span class="status-badge badge-completed">Completed</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Menu Section -->
+                        <div class="menu-section d-flex flex-column gap-4">
+                            <!-- Category Bar -->
+                            <div class="pos-category-bar d-flex bg-light-soft p-1 rounded-3">
+                                <button class="category-tab">Appetizer</button>
+                                <button class="category-tab active">Main course</button>
+                                <button class="category-tab">Dessert</button>
+                                <button class="category-tab">Beverage</button>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="fw-bold mb-0">Menu</h4>
+                                <span class="text-muted small">Showing 30 Items</span>
+                            </div>
+
+                            <!-- Menu Grid -->
+                            <div class="pos-menu-grid">
+                                <!-- Card 1 -->
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Crispy Dory Sambal Matah.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Crispy Dory Sambal Matah</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">50.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">4</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Kopag Benedict.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Kopag Benedict</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">75.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus disabled">-</button>
+                                            <span class="qty-val">0</span>
+                                            <button class="qty-btn plus">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Holland Bitterballen.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Holland Bitterballen</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">30.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">2</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Repeat for other items... -->
+                                <!-- Row 2 -->
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Dory En Oats.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Dory En Oats</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">101.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus disabled">-</button>
+                                            <span class="qty-val">0</span>
+                                            <button class="qty-btn plus">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Lemon Butter Dory.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Lemon Butter Dory</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">50.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">6</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Spicy Tuna Nachos.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Spicy Tuna Nachos</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">42.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus disabled">-</button>
+                                            <span class="qty-val">0</span>
+                                            <button class="qty-btn plus">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Alfredo.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Alfredo</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">50.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">6</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Banana Wrap.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Banana Wrap</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">50.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">6</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pos-menu-card">
+                                    <div class="pos-card-top d-flex gap-3">
+                                        <img src="../assets/images/Blackpaper Chicken.png" alt="Food">
+                                        <div class="pos-card-info">
+                                            <h6 class="fw-bold mb-1">Blackpaper Chicken</h6>
+                                            <p class="text-muted mb-2">Deep-fried bite sized balls with creamy...</p>
+                                            <div class="availability small text-muted">
+                                                <span>12 Available</span> • <span class="text-main fw-bold">6
+                                                    Sold</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pos-card-bottom d-flex justify-content-between align-items-center mt-3">
+                                        <span class="pos-price fw-bold">50.50</span>
+                                        <div class="qty-selector d-flex align-items-center gap-2">
+                                            <button class="qty-btn minus">-</button>
+                                            <span class="qty-val">6</span>
+                                            <button class="qty-btn plus active">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full Width Section: Table Selection (Hidden by default) -->
+                    <div class="col-lg-12 pos-left-pane d-none flex-column gap-4" id="tableView">
+                        <div class="bg-white rounded-4 p-5 h-100 shadow-sm overflow-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-5">
+                                <h4 class="fw-bold mb-0">Select table</h4>
+                                <div class="d-flex gap-4 align-items-center">
+                                    <div class="d-flex gap-4">
+                                        <div class="d-flex align-items-center gap-2"><span class="dot"
+                                                style="background: #3B82F6; width: 12px; height: 12px; border-radius: 50%;"></span>
+                                            <span class="small fw-500 text-muted">Available table</span></div>
+                                        <div class="d-flex align-items-center gap-2"><span class="dot"
+                                                style="background: #EF4444; width: 12px; height: 12px; border-radius: 50%;"></span>
+                                            <span class="small fw-500 text-muted">Reserved table</span></div>
+                                        <div class="d-flex align-items-center gap-2"><span class="dot"
+                                                style="background: #10B981; width: 12px; height: 12px; border-radius: 50%;"></span>
+                                            <span class="small fw-500 text-muted">Occupied table</span></div>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <select class="form-select" style="width: 140px; border-radius: 10px;">
+                                            <option>All table</option>
+                                        </select>
+                                        <input type="text" class="form-control" placeholder="Search"
+                                            style="width: 220px; border-radius: 10px;">
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-secondary rounded-pill px-3"
+                                        id="backToMenu">Back to Menu</button>
+                                </div>
+                            </div>
+
+                            <!-- Table Grid Content -->
+                            <div class="floor-plan-inline p-5 rounded-4"
+                                style="background: #FDFDFD; border: 1px solid #F1F5F9;">
+                                <!-- Row A -->
+                                <div class="d-flex justify-content-between mb-5 align-items-center">
+                                    <div class="d-flex gap-5">
+                                        <div class="table-wrap available">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-01</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap occupied">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-02</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap available large">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-03</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap available">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-04</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap occupied">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-05</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-label">A</div>
+                                </div>
+                                <!-- Row B -->
+                                <div class="d-flex justify-content-between mb-5 align-items-center">
+                                    <div class="d-flex gap-5">
+                                        <div class="table-wrap available">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-06</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap occupied">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-07</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap reserved large">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-08</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap available">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-09</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap reserved">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-10</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-label">B</div>
+                                </div>
+                                <!-- Row C -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex gap-5">
+                                        <div class="table-wrap reserved">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-11</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap reserved">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-12</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap available large">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-13</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap occupied">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-14</div>
+                                            </div>
+                                        </div>
+                                        <div class="table-wrap available">
+                                            <div class="t-box">
+                                                <div class="t-circle">T-15</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-label">C</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section: Process Order Sidebar -->
+                    <div class="col-lg-4 pos-right-pane" id="orderSidebar">
+                        <div class="process-order-sidebar">
+                            <h4 class="fw-bold mb-4 text-center">Process Order</h4>
+
+                            <!-- Toggle Dine-in/Take-away -->
+                            <div class="order-type-toggle d-flex bg-light p-1 rounded-3 mb-4">
+                                <button class="type-btn active flex-grow-1">Dine in</button>
+                                <button class="type-btn flex-grow-1">Take Away</button>
+                            </div>
+
+                            <!-- Customer Info -->
+                            <div class="customer-info-form d-flex flex-column gap-3 mb-4">
+                                <h6 class="fw-bold mb-0">Customer Information</h6>
+                                <input type="text" class="form-control pos-input" placeholder="Custumer name">
+                                <div class="position-relative">
+                                    <div class="form-select pos-input d-flex align-items-center justify-content-between cursor-pointer"
+                                        id="tableSelectBtn">
+                                        <span id="selectedTableLabel">Select table</span>
+                                    </div>
+                                </div>
+                                <!-- Add Note Button -->
+                                <button
+                                    class="btn btn-add-note w-100 d-flex align-items-center justify-content-center gap-2"
+                                    id="addNoteBtn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                    </svg>
+                                    Add Note
+                                </button>
+                            </div>
+
+                            <!-- Order Details -->
+                            <div class="order-details-section">
+                                <h6 class="fw-bold mb-3">Order Details</h6>
+                                <div class="cart-items-list d-flex flex-column gap-3 mb-4">
+                                    <!-- Cart Item 1 -->
+                                    <div class="cart-item d-flex align-items-center gap-3">
+                                        <img src="../assets/images/Crispy Dory Sambal Matah.png" alt="F"
+                                            class="cart-img">
+                                        <div class="flex-grow-1">
+                                            <h6 class="small fw-bold mb-2">Crispy dory sambal matah</h6>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="qty-selector mini d-flex align-items-center gap-2">
+                                                    <button class="qty-btn mini">-</button>
+                                                    <span class="qty-val small">2</span>
+                                                    <button class="qty-btn mini plus active">+</button>
+                                                </div>
+                                                <span class="fw-bold text-main"
+                                                    style="font-size: 0.9rem;">$101.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cart Item 2 -->
+                                    <div class="cart-item d-flex align-items-center gap-3">
+                                        <img src="../assets/images/Spicy Tuna Nachos.png" alt="F" class="cart-img">
+                                        <div class="flex-grow-1">
+                                            <h6 class="small fw-bold mb-2">Spicy Tuna Nachos</h6>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="qty-selector mini d-flex align-items-center gap-2">
+                                                    <button class="qty-btn mini">-</button>
+                                                    <span class="qty-val small">1</span>
+                                                    <button class="qty-btn mini plus active">+</button>
+                                                </div>
+                                                <span class="fw-bold text-main" style="font-size: 0.9rem;">$75.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cart Item 3 -->
+                                    <div class="cart-item d-flex align-items-center gap-3">
+                                        <img src="../assets/images/Alfredo.png" alt="F" class="cart-img">
+                                        <div class="flex-grow-1">
+                                            <h6 class="small fw-bold mb-2">Butterscotch</h6>
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="qty-selector mini d-flex align-items-center gap-2">
+                                                    <button class="qty-btn mini">-</button>
+                                                    <span class="qty-val small">1</span>
+                                                    <button class="qty-btn mini plus active">+</button>
+                                                </div>
+                                                <span class="fw-bold text-main" style="font-size: 0.9rem;">$12.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Summary -->
+                                <div class="order-summary-box">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="text-muted small fw-medium">Subtotal</span>
+                                        <span class="fw-bold text-main" style="font-size: 0.95rem;">$382.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <span class="text-muted small fw-medium">Tax (10%)</span>
+                                        <span class="fw-bold text-main" style="font-size: 0.95rem;">$38.20</span>
+                                    </div>
+                                    <div class="border-dashed-bottom mb-4"></div>
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <h6 class="fw-bold mb-0">Total</h6>
+                                        <h4 class="fw-bold mb-0 text-purple">$187</h4>
+                                    </div>
+                                    <button class="btn btn-process w-100" id="processTransactionBtn">Proccess
+                                        Transaction</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Note Modal -->
+    <div class="modal fade" id="addNoteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title fw-bold">Add note</h5>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L11 11M1 11L11 1" stroke="#FF4D4D" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <label class="form-label fw-600 mb-2">Enter Order Note</label>
+                    <textarea class="form-control pos-textarea" rows="6"
+                        placeholder="What your order note here.."></textarea>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button type="button" class="btn btn-outline-secondary flex-grow-1 py-2 rounded-3 fw-bold"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-process flex-grow-1 py-2 rounded-3 fw-bold m-0"
+                            style="padding: 12px !important;">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Selection Modal -->
+    <div class="modal fade" id="tableModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-header border-0 pb-0 pt-4 px-4 position-absolute top-0 end-0" style="z-index: 10;">
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M1 1L11 11M1 11L11 1" stroke="#FF4D4D" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                    <iframe src="book-table.html" style="width: 100%; height: 750px; border: none;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Booking Modal -->
+    <div class="modal fade" id="orderBookingModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 450px;">
+            <div class="modal-content border-0 rounded-4">
+                <div class="modal-header border-0 pb-0 pt-4 px-4">
+                    <h5 class="modal-title fw-bold">Order</h5>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M1 1L11 11M1 11L11 1" stroke="#FF4D4D" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="modal-body px-4 pb-4">
+                    <div class="border-bottom pb-3 mb-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="fw-bold mb-1">Table Order</h6>
+                            <span class="text-muted small">Order #1234</span>
+                        </div>
+                        <select class="form-select booking-select" id="orderTypeSelect" style="width: 160px;">
+                            <option value="running">Running order</option>
+                            <option value="reservation">Reservation</option>
+                        </select>
+                    </div>
+
+                    <!-- Selected Tables Chips -->
+                    <div class="d-flex gap-3 mb-4" id="selectedTableChips">
+                        <div class="table-chip">T-A04</div>
+                        <div class="table-chip">T-A03</div>
+                    </div>
+
+                    <!-- Reservation Specific Fields (Hidden by default) -->
+                    <div id="reservationFields" class="d-none">
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold mb-2">Select time</label>
+                            <div class="position-relative">
+                                <input type="text" class="form-control pos-input" value="09:15" readonly>
+                                <svg class="position-absolute top-50 end-0 translate-middle-y me-3 text-muted"
+                                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M9 18l6-6-6-6" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label small fw-bold mb-0">Select date</label>
+                                <small class="text-muted">March 2023 <svg width="10" height="10" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg></small>
+                            </div>
+                            <div class="date-strip">
+                                <button class="calendar-icon-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                        <circle cx="9" cy="14" r="1.5" fill="currentColor"></circle>
+                                    </svg>
+                                </button>
+                                <div class="date-card"><span class="day">Sun</span><span class="num">1</span></div>
+                                <div class="date-card"><span class="day">Mon</span><span class="num">2</span></div>
+                                <div class="date-card active"><span class="day">Tue</span><span class="num">3</span>
+                                </div>
+                                <div class="date-card"><span class="day">Wed</span><span class="num">4</span></div>
+                                <div class="date-card"><span class="day">Thu</span><span class="num">5</span></div>
+                                <div class="date-card"><span class="day">Fri</span><span class="num">6</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button type="button" class="btn btn-cancel-booking flex-grow-1"
+                            data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-add-order flex-grow-1">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Sidebar Overlay -->
+    <div class="payment-sidebar-overlay" id="paymentOverlay"></div>
+
+    <!-- Payment Sidebar -->
+    <div class="payment-sidebar" id="paymentSidebar">
+        <div class="d-flex justify-content-between align-items-start mb-4">
+            <div>
+                <h5 class="fw-bold mb-1">Order Payment</h5>
+                <span class="text-muted small">Order #12345</span>
+            </div>
+            <button type="button" class="btn-close-custom" id="closePaymentSidebar">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M1 1L11 11M1 11L11 1" stroke="#334155" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="payment-summary-card">
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted small">Subtotal</span>
+                <span class="fw-bold">$882.00</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted small">Tax (10%)</span>
+                <span class="fw-bold">$38.20</span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span class="fw-bold">Total</span>
+                <span class="fw-bold text-success" style="font-size: 1.1rem;">$982.00</span>
+            </div>
+        </div>
+
+        <input type="radio" id="methodCash" name="paymentMethod" class="payment-radio" checked>
+        <input type="radio" id="methodQris" name="paymentMethod" class="payment-radio">
+        <input type="radio" id="methodCard" name="paymentMethod" class="payment-radio">
+
+        <h6 class="fw-bold mb-3">Payment Method</h6>
+        <div class="payment-method-grid">
+            <label for="methodCash" class="payment-method-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2331/2331714.png" alt="Cash">
+                <span>Cash</span>
+            </label>
+            <label for="methodQris" class="payment-method-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" alt="Qris">
+                <span>Qris</span>
+            </label>
+            <label for="methodCard" class="payment-method-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Card">
+                <span>Debit/ Credit Card</span>
+            </label>
+        </div>
+
+        <!-- Method Specific Views -->
+        <div id="cashPaymentView" class="payment-view">
+            <!-- Cash view is now mostly the common numpad -->
+            <p class="text-muted small text-center mb-4">Please enter the cash amount received from the customer.</p>
+        </div>
+
+        <div id="qrisPaymentView" class="payment-view">
+            <div class="qris-content d-flex flex-column align-items-center text-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_QRIS.svg" alt="QRIS" class="mb-4"
+                    style="height: 30px;">
+                <div class="qris-code-container mb-4">
+                    <div class="qris-frame">
+                        <img src="../assets/images/qris-qr.png" alt="QR Code" class="qr-image">
+                        <div class="corner top-left"></div>
+                        <div class="corner top-right"></div>
+                        <div class="corner bottom-left"></div>
+                        <div class="corner bottom-right"></div>
+                    </div>
+                </div>
+                <p class="text-muted small mb-3">Waiting for transaction confirmation</p>
+                <div class="timer-wrapper mb-4">
+                    <div class="timer-circle">
+                        <span id="qrisTimer">20</span>
+                        <svg class="timer-svg" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" class="timer-bg"></circle>
+                            <circle cx="50" cy="50" r="45" class="timer-progress" id="timerProgress"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cardPaymentView" class="payment-view">
+            <div class="mb-4">
+                <label class="form-label small fw-bold mb-2">Bank</label>
+                <input type="text" class="form-control pos-input" placeholder="Slied your card">
+            </div>
+            <div class="mb-4">
+                <label class="form-label small fw-bold mb-2">Card number</label>
+                <input type="text" class="form-control pos-input" placeholder="********">
+            </div>
+        </div>
+
+        <!-- Common Input & Numpad Area (Hidden for QRIS via CSS) -->
+        <div class="common-payment-area">
+            <h6 class="fw-bold mb-3">Input Amount</h6>
+            <div class="input-amount-box">
+                <span id="paymentDisplayAmount">$ 982.00</span>
+            </div>
+
+            <div class="numpad-grid flex-grow-1">
+                <button class="num-btn">1</button><button class="num-btn">2</button><button class="num-btn">3</button>
+                <button class="num-btn">4</button><button class="num-btn">5</button><button class="num-btn">6</button>
+                <button class="num-btn">7</button><button class="num-btn">8</button><button class="num-btn">9</button>
+                <button class="num-btn">00</button><button class="num-btn">0</button>
+                <button class="num-btn backspace">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM18 9l-6 6M12 9l6 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <button class="btn btn-payment mt-4" data-bs-toggle="modal"
+            data-bs-target="#paymentSuccessModal">Payment</button>
+    </div>
+
+    <!-- Payment Failed Modal -->
+    <div class="modal fade" id="paymentFailedModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4 text-center">
+                    <div class="failed-icon-wrapper mb-3">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h4 class="fw-bold mb-1">Payment failed!</h4>
+                    <h3 class="fw-bold text-danger mb-4">$982.00</h3>
+
+                    <p class="text-muted small mb-4">Please check your payment information and try again later. We
+                        apologize for any inconvenience caused.</p>
+
+                    <div class="transaction-details mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted small">Order Id</span>
+                            <span class="fw-bold small">#123456</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted small">Payment Method</span>
+                            <span class="fw-bold small">Cash</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted small">Payment Time</span>
+                            <span class="fw-bold small">22/02/2024 10:15 AM</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-process w-100 py-3" data-bs-dismiss="modal">Back to Transaction</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="paymentSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4 text-center">
+                    <div class="success-icon-wrapper mb-3">
+                        <span style="font-size: 3rem;">🎉</span>
+                    </div>
+                    <h4 class="fw-bold mb-1">Payment successful!</h4>
+                    <h3 class="fw-bold text-success mb-4">$982.00</h3>
+
+                    <p class="text-muted small mb-4">Your transaction has been successfully processed.<br>Thank you for
+                        your purchase!</p>
+
+                    <div class="transaction-details mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted small">Order Id</span>
+                            <span class="fw-bold small">#123456</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-muted small">Payment Method</span>
+                            <span class="fw-bold small">Cash</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span class="text-muted small">Payment Time</span>
+                            <span class="fw-bold small">22/02/2024 10:15 AM</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column gap-2">
+                        <button class="btn btn-process w-100 py-3" onclick="location.reload()">New Order</button>
+                        <button
+                            class="btn btn-outline-secondary w-100 py-3 d-flex align-items-center justify-content-center gap-2"
+                            style="border-radius: 12px; font-weight: 700;" data-bs-toggle="modal"
+                            data-bs-target="#confirmPrintModal">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                <rect x="6" y="14" width="12" height="8" />
+                            </svg>
+                            Print Bills
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Confirm Print Modal -->
+    <div class="modal fade" id="confirmPrintModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="printer-icon-wrapper">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB"
+                                stroke-width="2">
+                                <path
+                                    d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                <rect x="6" y="14" width="12" height="8" />
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-0">Print bills?</h4>
+                    </div>
+                    <p class="text-muted small mb-4">Would you like to print bills now? Please confirm to proceed with
+                        the printing process.</p>
+
+                    <div class="d-flex flex-column gap-2">
+                        <button class="btn btn-process w-100 py-2" onclick="startPrintingProcess()">Confirm</button>
+                        <button class="btn btn-outline-secondary w-100 py-2"
+                            style="border-radius: 12px; font-weight: 600;" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Print Modal -->
+    <div class="modal fade" id="processingPrintModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="printer-icon-wrapper success">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C458"
+                                stroke-width="2">
+                                <path
+                                    d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+                                <rect x="6" y="14" width="12" height="8" />
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-0">Prosess print bills</h4>
+                    </div>
+                    <p class="text-muted small mb-4">Bills are currently being processed for printing. Please wait for
+                        completion. Thank you for your patience.</p>
+
+                    <div class="print-progress-container mb-4">
+                        <div class="print-progress-bar" id="printProgressBar"></div>
+                    </div>
+
+                    <button class="btn btn-outline-secondary w-100 py-2" style="border-radius: 12px; font-weight: 600;"
+                        onclick="cancelPrintingProcess()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Printing Success Modal -->
+    <div class="modal fade" id="printingSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="success-icon-wrapper-small">
+                            <span style="font-size: 1.5rem;">🎉</span>
+                        </div>
+                        <h4 class="fw-bold mb-0">Printing successful!</h4>
+                    </div>
+                    <p class="text-muted small mb-4">Your document has been successfully printed. Thank you for using
+                        our printing services</p>
+                    <button class="btn btn-replay w-100" data-bs-dismiss="modal">Back to history</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Printing Failed Modal -->
+    <div class="modal fade" id="printingFailedModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content border-0 rounded-4 overflow-hidden">
+                <div class="modal-body p-4">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="failed-icon-wrapper-small">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="4"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <h4 class="fw-bold mb-0">Printing failed!</h4>
+                    </div>
+                    <p class="text-muted small mb-4">Your document has been successfully printed. Thank you for using
+                        our printing services</p>
+                    <button class="btn btn-replay w-100" data-bs-dismiss="modal">Replay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const addNoteBtn = document.getElementById('addNoteBtn');
+        const tableSelectBtn = document.getElementById('tableSelectBtn');
+        const backToMenu = document.getElementById('backToMenu');
+        const addNoteModal = new bootstrap.Modal(document.getElementById('addNoteModal'));
+        const dashboardWrapper = document.querySelector('.dashboard-wrapper');
+        const menuView = document.getElementById('menuView');
+        const tableView = document.getElementById('tableView');
+
+        const orderSidebar = document.getElementById('orderSidebar');
+
+        const orderBookingModal = new bootstrap.Modal(document.getElementById('orderBookingModal'));
+        const orderTypeSelect = document.getElementById('orderTypeSelect');
+        const reservationFields = document.getElementById('reservationFields');
+        const tableWraps = document.querySelectorAll('.table-wrap');
+
+        addNoteBtn.addEventListener('click', () => {
+            addNoteModal.show();
+        });
+
+        tableSelectBtn.addEventListener('click', () => {
+            menuView.classList.add('d-none');
+            orderSidebar.classList.add('d-none');
+            tableView.classList.remove('d-none');
+            tableView.classList.add('d-flex');
+        });
+
+        backToMenu.addEventListener('click', () => {
+            tableView.classList.add('d-none');
+            tableView.classList.remove('d-flex');
+            menuView.classList.remove('d-none');
+            orderSidebar.classList.remove('d-none');
+        });
+
+        // Toggle Reservation Fields
+        orderTypeSelect.addEventListener('change', (e) => {
+            if (e.target.value === 'reservation') {
+                reservationFields.classList.remove('d-none');
+            } else {
+                reservationFields.classList.add('d-none');
+            }
+        });
+
+        // Open Booking Modal on Table Click
+        tableWraps.forEach(wrap => {
+            wrap.addEventListener('click', () => {
+                const tableName = wrap.querySelector('.t-circle').innerText;
+                document.getElementById('selectedTableChips').innerHTML = `<div class="table-chip">${tableName}</div>`;
+                orderBookingModal.show();
+            });
+        });
+
+        const paymentSidebar = document.getElementById('paymentSidebar');
+        const paymentOverlay = document.getElementById('paymentOverlay');
+        const closePaymentSidebar = document.getElementById('closePaymentSidebar');
+        const processTransactionBtn = document.getElementById('processTransactionBtn');
+        const paymentDisplayAmount = document.getElementById('paymentDisplayAmount');
+        const numBtns = document.querySelectorAll('.num-btn');
+        let currentAmount = "98200"; // Store as cents
+
+        processTransactionBtn.addEventListener('click', () => {
+            paymentSidebar.classList.add('active');
+            paymentOverlay.classList.add('active');
+        });
+
+        closePaymentSidebar.addEventListener('click', () => {
+            paymentSidebar.classList.remove('active');
+            paymentOverlay.classList.remove('active');
+        });
+
+        paymentOverlay.addEventListener('click', () => {
+            paymentSidebar.classList.remove('active');
+            paymentOverlay.classList.remove('active');
+        });
+
+        // Numpad logic
+        numBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('backspace')) {
+                    currentAmount = currentAmount.slice(0, -1) || "0";
+                } else {
+                    const val = btn.innerText;
+                    if (currentAmount === "0") currentAmount = val;
+                    else currentAmount += val;
+                }
+                updatePaymentDisplay();
+            });
+        });
+
+        const qrisTimer = document.getElementById('qrisTimer');
+        const timerProgress = document.getElementById('timerProgress');
+        let countdownInterval;
+
+        function startQrisTimer() {
+            let timeLeft = 20;
+            const totalTime = 20;
+            qrisTimer.innerText = timeLeft;
+
+            // Reset stroke-dashoffset
+            const circumference = 2 * Math.PI * 45;
+            timerProgress.style.strokeDasharray = circumference;
+            timerProgress.style.strokeDashoffset = 0;
+
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            countdownInterval = setInterval(() => {
+                timeLeft--;
+                qrisTimer.innerText = timeLeft;
+
+                const offset = circumference - (timeLeft / totalTime) * circumference;
+                timerProgress.style.strokeDashoffset = offset;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                }
+            }, 1000);
+        }
+
+        const methodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+
+        methodRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.id === 'methodQris') {
+                    startQrisTimer();
+                } else {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                }
+            });
+        });
+
+        // Blur handling for actual modals
+        const modalList = ['addNoteModal', 'orderBookingModal', 'paymentSuccessModal', 'paymentFailedModal', 'printingSuccessModal', 'printingFailedModal', 'confirmPrintModal', 'processingPrintModal'];
+        modalList.forEach(id => {
+            const modalEl = document.getElementById(id);
+            if (!modalEl) return;
+
+            modalEl.addEventListener('show.bs.modal', () => {
+                dashboardWrapper.classList.add('blurred');
+                if (id === 'paymentSuccessModal' || id === 'paymentFailedModal') {
+                    paymentSidebar.classList.remove('active');
+                    paymentOverlay.classList.remove('active');
+                }
+            });
+            modalEl.addEventListener('hide.bs.modal', () => {
+                dashboardWrapper.classList.remove('blurred');
+            });
+        });
+
+        // Printing Simulation
+        const processingPrintModal = new bootstrap.Modal(document.getElementById('processingPrintModal'));
+        const printingSuccessModal = new bootstrap.Modal(document.getElementById('printingSuccessModal'));
+        const printingFailedModal = new bootstrap.Modal(document.getElementById('printingFailedModal'));
+        const confirmPrintModal = new bootstrap.Modal(document.getElementById('confirmPrintModal'));
+        let printInterval;
+
+        function startPrintingProcess() {
+            confirmPrintModal.hide();
+            processingPrintModal.show();
+
+            let progress = 0;
+            const progressBar = document.getElementById('printProgressBar');
+            progressBar.style.width = '0%';
+
+            if (printInterval) clearInterval(printInterval);
+
+            printInterval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(printInterval);
+                    setTimeout(() => {
+                        processingPrintModal.hide();
+                        printingSuccessModal.show();
+                    }, 500);
+                }
+                progressBar.style.width = `${progress}%`;
+            }, 100);
+        }
+
+        function cancelPrintingProcess() {
+            if (printInterval) clearInterval(printInterval);
+            processingPrintModal.hide();
+            printingFailedModal.show();
+        }
+    </script>
+</body>
+
+</html>

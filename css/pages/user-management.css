@@ -1,0 +1,326 @@
+/* --- User Management Specific CSS --- */
+
+.btn-add-customer {
+    background-color: #00D366; /* Using a vibrant green */
+    color: white;
+    border-radius: 8px;
+    padding: 0.6rem 1.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-add-customer:hover {
+    background-color: #00b957;
+    color: white;
+}
+
+.search-box {
+    position: relative;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #E8ECEF;
+    border-radius: 8px;
+}
+
+.search-box input {
+    height: 42px;
+    border: none !important;
+    background: transparent !important;
+    padding-left: 2.5rem !important;
+    font-size: 0.9rem;
+}
+
+.search-box svg {
+    color: #A0ABC0;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+}
+
+/* Table Styles */
+.customer-table {
+    border-collapse: separate;
+    border-spacing: 0 12px;
+}
+
+.customer-table th {
+    border-bottom: none;
+    color: #A0ABC0;
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding-bottom: 15px;
+}
+
+.sort-icon {
+    font-size: 0.6rem;
+    margin-left: 4px;
+    color: #CBD5E1;
+}
+
+.customer-table td {
+    padding: 1rem;
+    border-top: 1px solid #F1F5F9;
+    border-bottom: 1px solid #F1F5F9;
+    vertical-align: middle;
+    background-color: white;
+}
+
+.customer-table tr td:first-child {
+    border-left: 1px solid #F1F5F9;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.customer-table tr td:last-child {
+    border-right: 1px solid #F1F5F9;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Make rows look like cards */
+.customer-table tbody tr {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.01);
+}
+
+.customer-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.text-main {
+    color: #2D3748;
+}
+
+/* Email Cell */
+.email-cell {
+    color: #718096;
+    font-size: 0.95rem;
+}
+
+.email-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #8B5CF6; /* Purple matching design */
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 0.4rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: inline-block;
+    min-width: 100px;
+    text-align: center;
+}
+
+.status-badge.active {
+    background-color: #E6F7F0;
+    color: #00D366;
+}
+
+.status-badge.vip {
+    background-color: #FFF5E6;
+    color: #F6AD55;
+}
+
+.status-badge.inactive {
+    background-color: #FFE6E6;
+    color: #FC8181;
+}
+
+/* Custom Checkbox */
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E2E8F0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.custom-checkbox.checked {
+    background-color: #00D366;
+    border-color: #00D366;
+    color: white;
+}
+
+/* Action Popup */
+.action-popup {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 8px;
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 4px;
+    z-index: 10;
+    min-width: 100px;
+}
+
+.action-popup.show {
+    display: flex;
+}
+
+.action-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.action-item.edit {
+    color: #3B82F6;
+    background-color: #EFF6FF;
+}
+
+.action-item.delete {
+    color: #EF4444;
+    background-color: #FEF2F2;
+}
+
+/* Pagination */
+.pagination-ui .page-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E2E8F0;
+    background: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #718096;
+    transition: all 0.2s;
+}
+
+.pagination-ui .page-btn.active {
+    background-color: #00D366;
+    color: white;
+    border-color: #00D366;
+}
+
+.pagination-ui .page-btn:not(.active):hover {
+    background-color: #F7FAFC;
+}
+
+.pagination-ui .page-btn.border-0 {
+    width: auto;
+    padding: 0 8px;
+}
+
+/* Modal Styles */
+.custom-modal .modal-content {
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-header {
+    padding-bottom: 0;
+}
+
+.btn-close-custom {
+    background-color: #FFF4F4;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-close-custom:hover {
+    background-color: #FFE5E5;
+}
+
+.modal-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2D3748;
+    margin-bottom: 8px;
+}
+
+.modal-input {
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    color: #1E293B;
+}
+
+.modal-input::placeholder {
+    color: #94A3B8;
+}
+
+.modal-input:focus {
+    border-color: #00D366;
+    box-shadow: 0 0 0 2px rgba(0, 211, 102, 0.1);
+    outline: none;
+}
+
+.custom-select-arrow {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%2364748B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 32px;
+}
+
+.btn-modal-cancel {
+    background-color: #E8F5E9;
+    color: #00C458;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.btn-modal-cancel:hover {
+    background-color: #D1EFE0;
+}
+
+.btn-modal-save {
+    background-color: #00C458;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 32px;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.btn-modal-save:hover {
+    background-color: #00A94C;
+}
+
+

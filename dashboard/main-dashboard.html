@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Yummy Yard</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/pages/main-dashboard.css">
+</head>
+
+<body>
+    <div class="container-fluid p-0 dashboard-wrapper">
+        <!-- Sidebar (Hidden on mobile, shown as Offcanvas) -->
+        <aside class="sidebar d-none d-lg-flex">
+            <div class="sidebar-header d-flex align-items-center gap-3">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo">
+                    <span class="brand-name">Yummy <span class="yard-text">Yard</span></span>
+                </div>
+                <button class="btn btn-link p-0 ms-auto text-muted sidebar-toggle">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="8" x2="16" y2="8"></line>
+                        <line x1="4" y1="12" x2="16" y2="12"></line>
+                        <line x1="4" y1="16" x2="16" y2="16"></line>
+                        <path d="M19 10l3 3-3 3"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="main-dashboard.html" class="nav-item active"><img src="../assets/icons/Dashboard1.png"
+                        alt="Dash"><span>Dashboard</span></a>
+                <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                        alt="Orders"><span>Orders</span></a>
+                <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png"
+                        alt="Menu"><span>Menu</span></a>
+                <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                        alt="Bills"><span>Bills</span></a>
+                <a href="history.html" class="nav-item"><img src="../assets/icons/history.png"
+                        alt="Hist"><span>History</span></a>
+                <a href="product-management.html" class="nav-item"><img src="../assets/icons/productmanagement.png"
+                        alt="Prod"><span>Product Management</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="../auth/login.html" class="nav-item">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar (Offcanvas) -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileSidebar">
+            <div class="offcanvas-header border-bottom">
+                <div class="brand-info">
+                    <img src="../assets/images/LOGO.png" alt="Logo" class="mini-logo" style="width: 30px;">
+                    <span class="brand-name h5 mb-0 ms-2">Yummy Yard</span>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <nav class="sidebar-nav w-100">
+                    <a href="#" class="nav-item active"><img src="../assets/icons/Dashboard1.png"
+                            alt="Dash"><span>Dashboard</span></a>
+                    <a href="orders.html" class="nav-item"><img src="../assets/icons/Orders.png"
+                            alt="Orders"><span>Orders</span></a>
+                    <a href="../menu/menu-list.html" class="nav-item"><img src="../assets/icons/Menu.png"
+                            alt="Menu"><span>Menu</span></a>
+                    <a href="../bills/bills-list.html" class="nav-item"><img src="../assets/icons/bills.png"
+                            alt="Bills"><span>Bills</span></a>
+                    <a href="history.html" class="nav-item"><img src="../assets/icons/history.png"
+                            alt="Hist"><span>History</span></a>
+                    <a href="product-management.html" class="nav-item"><img src="../assets/icons/productmanagement.png"
+                            alt="Prod"><span>Product Management</span></a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="dashboard-layout flex-grow-1 d-flex flex-column">
+            <header class="top-utility-bar px-4 px-lg-5">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-link d-lg-none p-0 text-dark" data-bs-toggle="offcanvas"
+                        data-bs-target="#mobileSidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="breadcrumb mb-0 d-none d-md-block">Home</div>
+                </div>
+                <div class="header-right d-flex align-items-center gap-2 gap-md-4">
+                    <div class="dropdown d-none d-md-block">
+                        <button
+                            class="btn btn-link text-decoration-none text-dark dropdown-toggle d-flex align-items-center gap-2"
+                            type="button" data-bs-toggle="dropdown">
+                            <img src="https://flagcdn.com/w20/us.png" alt="US" style="width: 20px; border-radius: 2px;">
+                            <span class="small fw-bold">Eng (US)</span>
+                        </button>
+                    </div>
+
+                    <button class="icon-btn border-0 bg-transparent">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </button>
+
+                    <style>
+                        .icon-btn {
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: #64748B;
+                            transition: all 0.2s;
+                        }
+
+                        .icon-btn:hover {
+                            background: #F1F5F9;
+                        }
+                    </style>
+
+                    <div class="profile-section" style="cursor: pointer;"
+                        onclick="location.href='account-settings.html'">
+                        <img src="../assets/images/profileimage.png" alt="User" class="profile-img">
+                        <span class="user-name d-none d-md-block">Courtney Henry</span>
+                        <svg class="d-none d-md-block" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-main-card m-3 m-md-4 flex-grow-1">
+                <div class="container-fluid p-3 p-md-4 p-lg-5 h-100">
+                    <div class="row g-4">
+                        <!-- Left Section (Stats + Charts) -->
+                        <div class="col-12 col-xl-9">
+                            <header
+                                class="dashboard-header d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                                <div class="welcome-msg">
+                                    <h1 class="h3 fw-bold mb-1">Hello, Rijal 👋</h1>
+                                    <p class="text-secondary mb-0">Here some reports on your dashboard</p>
+                                </div>
+                                <div
+                                    class="header-tools d-flex align-items-center gap-3 flex-grow-1 justify-content-md-end">
+                                    <div class="search-box flex-grow-1" style="max-width: 400px;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                        </svg>
+                                        <input type="text" class="form-control" placeholder="Search">
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="icon-btn-card message-btn">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2">
+                                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z">
+                                                </path>
+                                            </svg>
+                                            <span class="noti-dot"></span>
+                                        </button>
+                                        <button class="icon-btn-card"><svg width="22" height="22" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="2">
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <path
+                                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                                </path>
+                                            </svg></button>
+                                    </div>
+                                </div>
+                            </header>
+
+                            <!-- Stats Cards Row -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-12 col-sm-6 col-xl-3">
+                                    <div class="stat-card h-100">
+                                        <div class="stat-top">
+                                            <div class="icon-circle sale"><img src="../assets/icons/Totalsales.png"
+                                                    alt="S" width="28"></div>
+                                            <div class="stat-meta">
+                                                <h3>Total sale</h3>
+                                                <div class="stat-trend-row"><span>From last week</span><span
+                                                        class="trend-pill">27.4%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-bottom">
+                                            <h2>$24,064</h2><span class="stat-arrow">↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-xl-3">
+                                    <div class="stat-card h-100">
+                                        <div class="stat-top">
+                                            <div class="icon-circle order"><img src="../assets/icons/Totalorder.png"
+                                                    alt="O" width="28"></div>
+                                            <div class="stat-meta">
+                                                <h3>Total order</h3>
+                                                <div class="stat-trend-row"><span>From last week</span><span
+                                                        class="trend-pill">27.4%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-bottom">
+                                            <h2>$24,064</h2><span class="stat-arrow">↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-xl-3">
+                                    <div class="stat-card h-100">
+                                        <div class="stat-top">
+                                            <div class="icon-circle revenue"><img src="../assets/icons/Totalrevenue.png"
+                                                    alt="R" width="28"></div>
+                                            <div class="stat-meta">
+                                                <h3>Total revenue</h3>
+                                                <div class="stat-trend-row"><span>From last week</span><span
+                                                        class="trend-pill">27.4%</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-bottom">
+                                            <h2>$24,064</h2><span class="stat-arrow">↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-xl-3">
+                                    <div class="stat-card h-100">
+                                        <div class="stat-top">
+                                            <div class="icon-circle cancelled"><img
+                                                    src="../assets/icons/cancelledorder.png" alt="C" width="28"></div>
+                                            <div class="stat-meta">
+                                                <h3>Cancelled order</h3>
+                                                <div class="stat-trend-row"><span>From last week</span><span
+                                                        class="trend-pill bg-danger-subtle text-danger">27.4%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-bottom">
+                                            <h2>$24,064</h2><span class="stat-arrow">↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Charts and Tables Grid -->
+                            <div class="row g-4 mb-4">
+                                <!-- Sales Chart (Left) -->
+                                <div class="col-12 col-md-8">
+                                    <div class="card-box h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h2 class="h5 fw-bold mb-0">Sales</h2>
+                                            <div class="chart-legend d-flex align-items-center gap-3">
+                                                <span><span class="dot blue"></span> Income</span>
+                                                <select class="form-select form-select-sm" style="width: auto;">
+                                                    <option>Last 6 month</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="height: 300px;"><canvas id="salesChart"></canvas></div>
+                                    </div>
+                                </div>
+                                <!-- Income Donut (Right) -->
+                                <div class="col-12 col-md-4">
+                                    <div class="card-box h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h2 class="h5 fw-bold mb-0">Income</h2>
+                                            <select class="form-select form-select-sm w-auto">
+                                                <option>Jan</option>
+                                            </select>
+                                        </div>
+                                        <div
+                                            class="donut-container d-flex align-items-center justify-content-between pt-2">
+                                            <div class="donut-legend d-flex flex-column gap-3">
+                                                <div class="legend-item"><span class="legend-dot main"></span> Main
+                                                    Course
+                                                </div>
+                                                <div class="legend-item"><span class="legend-dot bev"></span> Beverage
+                                                </div>
+                                                <div class="legend-item"><span class="legend-dot other"></span> Others
+                                                </div>
+                                            </div>
+                                            <div class="donut-chart-box position-relative"
+                                                style="width: 150px; height: 150px;">
+                                                <canvas id="incomeChart"></canvas>
+                                                <div
+                                                    class="donut-center position-absolute top-50 start-50 translate-middle text-center">
+                                                    <div class="small text-secondary fw-bold"
+                                                        style="font-size: 0.7rem;">
+                                                        Total</div>
+                                                    <div class="fw-bold" style="font-size: 1.1rem;">$15,490</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-4">
+                                <!-- Transactions (Left) -->
+                                <div class="col-12 col-md-8">
+                                    <div class="card-box h-100">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h2 class="h5 fw-bold mb-0">Transactions</h2>
+                                            <select class="form-select form-select-sm" style="width: auto;">
+                                                <option>Recent</option>
+                                            </select>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table align-middle">
+                                                <thead class="text-secondary small">
+                                                    <tr>
+                                                        <th>Name products</th>
+                                                        <th class="text-center">Date/Time</th>
+                                                        <th class="text-end">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fw-semibold">
+                                                    <tr>
+                                                        <td><img src="../assets/images/Tomato.png" alt="T"
+                                                                class="rounded-2 me-2" width="35" height="35" style="object-fit: cover;"> Tomato</td>
+                                                        <td class="text-center text-muted">Wed, 04 Jun 2023</td>
+                                                        <td class="text-end">$30.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="../assets/images/Egg.png" alt="E"
+                                                                class="rounded-2 me-2" width="35" height="35" style="object-fit: cover;"> Egg</td>
+                                                        <td class="text-center text-muted">Wed, 04 Jun 2023</td>
+                                                        <td class="text-end">$30.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><img src="../assets/images/Alfredo.png" alt="A"
+                                                                class="rounded-2 me-2" width="35" height="35" style="object-fit: cover;"> Alfredo Pasta</td>
+                                                        <td class="text-center text-muted">Wed, 04 Jun 2023</td>
+                                                        <td class="text-end">$35.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Trending Menu (Right) -->
+                                <div class="col-12 col-md-4">
+                                    <div class="card-box h-100 pb-0 overflow-hidden">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h2 class="h5 fw-bold mb-0">Trending menu</h2>
+                                            <span class="text-secondary cursor-pointer fw-bold">⋮</span>
+                                        </div>
+                                        <div class="trending-list">
+                                            <div class="trending-item d-flex align-items-center gap-3">
+                                                <img src="../assets/images/Kopag Benedict.png" alt="K"
+                                                    class="rounded-circle" width="48" height="48"
+                                                    style="object-fit: cover;">
+                                                <div class="flex-grow-1">
+                                                    <h4 class="mb-0 fw-bold" style="font-size: 1.05rem;">Kopag Benedict
+                                                    </h4>
+                                                    <div class="text-secondary" style="font-size: 0.85rem;">Order :
+                                                        <span class="fw-bold text-primary-light">150</span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="badge bg-success-subtle text-success rounded-pill px-3 py-2">27.4%</span>
+                                            </div>
+                                            <div class="trending-item d-flex align-items-center gap-3">
+                                                <img src="../assets/images/Banana Wrap.png" alt="B"
+                                                    class="rounded-circle" width="48" height="48"
+                                                    style="object-fit: cover;">
+                                                <div class="flex-grow-1">
+                                                    <h4 class="mb-0 fw-bold" style="font-size: 1.05rem;">Banana Wrap
+                                                    </h4>
+                                                    <div class="text-secondary" style="font-size: 0.85rem;">Order :
+                                                        <span class="fw-bold text-primary-light">124</span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="badge bg-success-subtle text-success rounded-pill px-3 py-2">22.1%</span>
+                                            </div>
+                                            <div class="trending-item d-flex align-items-center gap-3">
+                                                <img src="../assets/images/Blackpaper Chicken.png" alt="B"
+                                                    class="rounded-circle" width="48" height="48"
+                                                    style="object-fit: cover;">
+                                                <div class="flex-grow-1">
+                                                    <h4 class="mb-0 fw-bold" style="font-size: 1.05rem;">Blackpaper Chicken
+                                                    </h4>
+                                                    <div class="text-secondary" style="font-size: 0.85rem;">Order :
+                                                        <span class="fw-bold text-primary-light">98</span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="badge bg-success-subtle text-success rounded-pill px-3 py-2">18.5%</span>
+                                            </div>
+                                            <div class="trending-item d-flex align-items-center gap-3">
+                                                <img src="../assets/images/Crispy Dory Sambal Matah.png" alt="C"
+                                                    class="rounded-circle" width="48" height="48"
+                                                    style="object-fit: cover;">
+                                                <div class="flex-grow-1">
+                                                    <h4 class="mb-0 fw-bold" style="font-size: 1.05rem;">Crispy Dory
+                                                    </h4>
+                                                    <div class="text-secondary" style="font-size: 0.85rem;">Order :
+                                                        <span class="fw-bold text-primary-light">85</span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="badge bg-success-subtle text-success rounded-pill px-3 py-2">15.2%</span>
+                                            </div>
+                                            <div class="trending-item d-flex align-items-center gap-3">
+                                                <img src="../assets/images/Holland Bitterballen.png" alt="H"
+                                                    class="rounded-circle" width="48" height="48"
+                                                    style="object-fit: cover;">
+                                                <div class="flex-grow-1">
+                                                    <h4 class="mb-0 fw-bold" style="font-size: 1.05rem;">Holland Bitterballen
+                                                    </h4>
+                                                    <div class="text-secondary" style="font-size: 0.85rem;">Order :
+                                                        <span class="fw-bold text-primary-light">72</span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="badge bg-success-subtle text-success rounded-pill px-3 py-2">12.9%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Section (Profile) -->
+                        <div class="col-12 col-xl-3">
+                            <aside class="profile-card card-box h-100 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h2 class="h5 fw-bold mb-0">Profile</h2>
+                                    <span class="text-secondary cursor-pointer">•••</span>
+                                </div>
+                                <div class="text-center mb-4 pb-4 border-bottom">
+                                    <div class="user-avatar mx-auto mb-3 shadow-sm border p-1"><img
+                                            src="../assets/images/profileimage.png" alt="C"
+                                            class="rounded-circle w-100 h-100 object-fit-cover"></div>
+                                    <h3 class="h6 fw-bold mb-1">Courtney Henry</h3>
+                                    <p class="text-secondary small mb-0">Designer</p>
+                                </div>
+                                <nav class="nav flex-column gap-4">
+                                    <a href="#" class="quick-item active px-3 py-2 rounded-3 text-decoration-none">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" class="me-3">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                        <span>Analytics</span>
+                                    </a>
+                                    <a href="account-settings.html"
+                                        class="quick-item px-3 py-2 rounded-3 text-decoration-none text-secondary">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" class="me-3">
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                            <path
+                                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                                            </path>
+                                        </svg>
+                                        <span>Account Setting</span>
+                                    </a>
+                                    <a href="user-management.html"
+                                        class="quick-item px-3 py-2 rounded-3 text-decoration-none text-secondary">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" class="me-3">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <span>Customer List</span>
+                                    </a>
+                                    <a href="report.html"
+                                        class="quick-item px-3 py-2 rounded-3 text-decoration-none text-secondary">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" class="me-3">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                            <polyline points="14 2 14 8 20 8"></polyline>
+                                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                                            <polyline points="10 9 9 9 8 9"></polyline>
+                                        </svg>
+                                        <span>Report</span>
+                                    </a>
+                                    <a href="#"
+                                        class="quick-item px-3 py-2 rounded-3 text-decoration-none text-secondary">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" class="me-3">
+                                            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                                            <line x1="2" y1="10" x2="22" y2="10"></line>
+                                        </svg>
+                                        <span>Transaction</span>
+                                    </a>
+                                </nav>
+                                <a href="../auth/login.html"
+                                    class="logout-btn mt-auto px-3 py-2 btn btn-link text-decoration-none text-secondary d-flex align-items-center gap-3">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>
+                                    <span>Log out</span>
+                                </a>
+                            </aside>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End of dashboard-main-card -->
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Income',
+                    data: [1500, 1200, 1800, 4200, 2100, 2600],
+                    borderColor: '#1E60F2',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: 'rgba(30, 96, 242, 0.05)',
+                    pointRadius: [0, 0, 0, 6, 0, 0], // Only show point for April
+                    pointBackgroundColor: '#1E60F2',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        enabled: true,
+                        backgroundColor: '#1A1D23',
+                        padding: 10,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            label: function (context) {
+                                return `$${context.parsed.y.toLocaleString()} ↑ 16.2%`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#F1F4F9' },
+                        ticks: { stepSize: 500 }
+                    }
+                }
+            }
+        });
+
+        const incomeCtx = document.getElementById('incomeChart').getContext('2d');
+        new Chart(incomeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Main Course', 'Beverage', 'Others'],
+                datasets: [{
+                    data: [50, 30, 20],
+                    backgroundColor: ['#1A369C', '#2F61FF', '#9CB2FF'],
+                    borderWidth: 0,
+                    cutout: '80%'
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+    </script>
+</body>
+
+</html>
