@@ -157,6 +157,11 @@ body {
     color: #8E99AF;
 }
 
+.forgot-row {
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
 .form-options {
     display: flex;
     align-items: center;
